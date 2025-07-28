@@ -26,6 +26,7 @@ requirements:
     - python
     - snowflake-snowpark-python >=1.32.0
     - pyyaml >=6.0.2,<7.0.0
+    # - airflow
 
 test:
   source_files:
@@ -49,7 +50,6 @@ test:
     # - pytest -v tests
   requires:
     - pip
-    # - airflow
 
 about:
   home: https://pypi.org/project/snowpark-submit
