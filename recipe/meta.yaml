@@ -26,7 +26,7 @@ requirements:
     - python
     - snowflake-snowpark-python >=1.32.0
     - pyyaml >=6.0.2,<7.0.0
-    # - airflow
+    - airflow
 
 test:
   source_files:
@@ -36,8 +36,8 @@ test:
     - snowflake.connector.backoff_policies
     - snowflake.connector.config_manager
     - snowflake.connector.errors
-    # - snowflake.operators.snowpark_submit.snowpark_submit_operator
-    # - snowflake.operators.snowpark_submit.snowpark_submit_status_operator
+    - snowflake.operators.snowpark_submit.snowpark_submit_operator
+    - snowflake.operators.snowpark_submit.snowpark_submit_status_operator
     - snowflake.snowpark
     - snowflake.snowpark_submit.cluster_mode.job_runner
     - snowflake.snowpark_submit.cluster_mode.spark_connect.spark_connect_job_runner
