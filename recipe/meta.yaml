@@ -1,0 +1,66 @@
+{% set name = "snowpark-submit" %}
+{% set version = "0.20.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/snowpark_submit-{{ version }}.tar.gz
+  sha256: 07ac612f6d9e326e4aa1772b6a2b5e804c16af3b732d17a6f02538e61f3e156f
+
+build:
+  entry_points:
+    - snowpark-submit=snowflake.snowpark_submit.snowpark_submit:runner_wrapper
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 100
+  skip: True  # [py<310 or py>312]
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+    - wheel
+  run:
+    - python
+    - snowflake-snowpark-python >=1.32.0
+    - pyyaml >=6.0.2,<7.0.0
+
+test:
+  source_files:
+    - tests
+  imports:
+    - snowflake
+    - snowflake.connector.backoff_policies
+    - snowflake.connector.config_manager
+    - snowflake.connector.errors
+    # - snowflake.operators.snowpark_submit.snowpark_submit_operator
+    # - snowflake.operators.snowpark_submit.snowpark_submit_status_operator
+    - snowflake.snowpark
+    - snowflake.snowpark_submit.cluster_mode.job_runner
+    - snowflake.snowpark_submit.cluster_mode.spark_connect.spark_connect_job_runner
+    - snowflake.snowpark_submit.file_path
+    - snowflake.snowpark_submit.snowpark_submit
+  commands:
+    - pip check
+    - snowpark-submit --help
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    # - pytest -v tests
+  requires:
+    - pip
+    # - airflow
+
+about:
+  home: https://pypi.org/project/snowpark-submit
+  summary: Run a Spark script in SAS environment.
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE.txt
+  description: The snowpark-submit is designed for running non-interactive, 
+    batch-oriented Spark workloads directly on Snowflake's infrastructure using familiar Spark semantics. 
+    It eliminates the need to manage a dedicated Spark cluster while allowing you to maintain your existing 
+    Spark development workflows. This tool is ideal for submitting production-ready Spark applications—such as 
+    ETL pipelines, and scheduled data transformations—using a simple CLI interface.
+  doc_url: https://pypi.org/project/snowpark-submit
+  dev_url: https://pypi.org/project/snowpark-submit
