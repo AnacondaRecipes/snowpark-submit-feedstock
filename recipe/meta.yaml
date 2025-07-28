@@ -26,7 +26,6 @@ requirements:
     - python
     - snowflake-snowpark-python >=1.32.0
     - pyyaml >=6.0.2,<7.0.0
-    - airflow
 
 test:
   source_files:
@@ -36,8 +35,9 @@ test:
     - snowflake.connector.backoff_policies
     - snowflake.connector.config_manager
     - snowflake.connector.errors
-    - snowflake.operators.snowpark_submit.snowpark_submit_operator
-    - snowflake.operators.snowpark_submit.snowpark_submit_status_operator
+    # Skipping checks for the following imports due to the absence of the 'apache-airflow' dependency. Confirmed with Snowflake.
+    # - snowflake.operators.snowpark_submit.snowpark_submit_operator
+    # - snowflake.operators.snowpark_submit.snowpark_submit_status_operator
     - snowflake.snowpark
     - snowflake.snowpark_submit.cluster_mode.job_runner
     - snowflake.snowpark_submit.cluster_mode.spark_connect.spark_connect_job_runner
@@ -47,7 +47,8 @@ test:
     - pip check
     - snowpark-submit --help
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    # - pytest -v tests
+    # Upstream tests skipped due to missing 'apache-airflow' dependency. 
+    # It has been confirmed with Snowflake that users need to manually install the appropriate version of 'apache-airflow'.
   requires:
     - pip
 
