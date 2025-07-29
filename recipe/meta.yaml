@@ -26,7 +26,6 @@ requirements:
     - python
     - snowflake-snowpark-python >=1.32.0
     - pyyaml >=6.0.2,<7.0.0
-    # Skip 'apache-airflow' dependency discussion: https://anaconda.slack.com/archives/C02D68R4D0D/p1753703198399899
 
 test:
   imports:
