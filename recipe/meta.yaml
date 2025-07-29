@@ -28,8 +28,6 @@ requirements:
     - pyyaml >=6.0.2,<7.0.0
 
 test:
-  source_files:
-    - tests
   imports:
     - snowflake
     - snowflake.connector.backoff_policies
@@ -47,8 +45,6 @@ test:
     - pip check
     - snowpark-submit --help
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    # Upstream tests skipped due to missing 'apache-airflow' dependency. 
-    # It has been confirmed with Snowflake that users need to manually install the appropriate version of 'apache-airflow'.
   requires:
     - pip
 
