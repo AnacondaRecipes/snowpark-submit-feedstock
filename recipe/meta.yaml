@@ -34,6 +34,7 @@ test:
     - snowflake.connector.config_manager
     - snowflake.connector.errors
     # Skipping checks for the following imports due to the absence of the 'apache-airflow' dependency. Confirmed with Snowflake.
+    # More details: https://github.com/AnacondaRecipes/snowpark-submit-feedstock/pull/1#issue-3269225010
     # - snowflake.operators.snowpark_submit.snowpark_submit_operator
     # - snowflake.operators.snowpark_submit.snowpark_submit_status_operator
     - snowflake.snowpark
